@@ -5,7 +5,6 @@ import { TourPackage } from "@/types/tour";
 import SearchExcursions from "@/components/atoms/SearchExcursions/SearchExcursios";
 import Explore from "@/components/molecules/ExploreExcursios";
 import Drops from "@/components/atoms/drops";
-import ExcursionsCardTour from "@/components/molecules/Excursions/ExcursionsCardTour";
 
 interface HomeProps {
   toursData: TourPackage[];
@@ -28,7 +27,7 @@ const Home: React.FC<HomeProps> = ({ toursData }) => {
           Tours and Tickets to Experience Giza Pyramids
         </h2>
         <div className="lg:px-5 px-3">
-          <ExcursionsCardTour toursData={toursData} />
+          <Excursions toursData={toursData} />
         </div>
       </div>
     </div>

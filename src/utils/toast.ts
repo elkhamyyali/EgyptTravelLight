@@ -2,43 +2,43 @@ import {
   toast,
   ToastOptions as ToastOptions_TP,
   ToastPosition,
-} from "react-toastify";
+} from 'react-toastify';
 
 const toastOptions: ToastOptions_TP = {
-  position: "top-right",
+  position: 'top-right',
   autoClose: 2000,
   hideProgressBar: true,
   closeOnClick: true,
   pauseOnHover: true,
   draggable: false,
   progress: undefined,
-  theme: "light",
+  theme: 'light',
 };
 
 const STYLES = {
-  success: "text-mainGreen",
-  error: "bg-mainRed text-white",
-  info: "bg-blue-300 text-white",
-  loading: "bg-blue-300 text-white",
+  success: 'text-mainGreen',
+  error: 'bg-mainRed text-white',
+  info: 'bg-blue-300 text-white',
+  loading: 'bg-blue-300 text-white',
 };
 
 type ToastType = keyof typeof STYLES;
 
 export const notify = (
-  type: ToastType = "success",
+  type: ToastType = 'success',
   msg?: string,
-  position: ToastPosition = "top-right",
+  position: ToastPosition = 'top-right',
   isLoading: boolean = false
 ) => {
-  let message = msg || "Successful operation";
+  let message = msg || ('Successful operation');
 
-  if (type === "error" && !!!msg) {
-    message = "Something went wrong";
+  if (type === 'error' && !!!msg) {
+    message = ('Something went wrong');
   }
   if (isLoading) {
-    message = msg || "Uploading now...";
+    message = msg || ('Uploading now...');
   }
-  const className = STYLES[isLoading ? "loading" : type];
+  const className = STYLES[isLoading ? 'loading' : type];
 
   toast[type](message, {
     ...toastOptions,

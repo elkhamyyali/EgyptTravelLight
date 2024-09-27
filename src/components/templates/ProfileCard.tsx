@@ -5,48 +5,50 @@ import User from "../../../public/assets/infocard.png";
 
 type ProfileCardProps = {
   name: string;
-  username: string;
-  date: string;
-  rating: number;
-  content: string;
+  imgSrc: string;
+  alt: string;
+  id: number;
 };
 
-const ProfileCard: React.FC<ProfileCardProps> = ({
-  name,
-  username,
-  date,
-  rating,
-  content,
-}) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ name, imgSrc, alt }) => {
   return (
-    <div className="relative md:max-w-3xl  md:mx-auto mx-3 overflow-hidden">
-      <div className="p-4">
-        <div className="flex items-start mb-4">
+    <div className="relative lg:mr-0 mr-5 bg-white rounded-lg shadow-md overflow-hidden cursor-pointer">
+      {/* Icon positioned in the top-right corner */}
+      <div className="absolute top-4 right-4 bg-white rounded-full shadow-md">
+        <Image
+          className="w-8 h-8"
+          src={imgSrc}
+          alt={alt}
+          width={32}
+          height={32}
+        />
+      </div>
+
+      <div className="p-4 flex flex-col items-center">
+        {/* Centered profile image */}
+        <div className="relative mb-3">
           <Image
+            className="w-20 h-20 rounded-full object-cover"
             src={User}
-            alt="Profile picture"
-            width={48}
-            height={48}
-            className="rounded-full mr-3"
+            alt="Profile"
+            width={80}
+            height={80}
           />
-          <div className="flex-1">
-            <h3 className="font-bold text-black">{name}</h3>
-            <div className="text-sm text-gray-500">
-              <span>@{username}</span>
-              <span className="mx-2">•</span>
-              <span>{date}</span>
-            </div>
-          </div>
         </div>
-        <div className="flex items-center mb-2">
-          {[...Array(rating)].map((_, i) => (
-            <FaStar key={i} className="text-yellow-500" />
-          ))}
-          {[...Array(5 - rating)].map((_, i) => (
-            <FaStar key={i + rating} className="text-gray-300" />
+
+        {/* Stars and text */}
+        <div className="flex mb-2">
+          {[...Array(5)].map((_, i) => (
+            <FaStar key={i} className="w-5 h-5 text-yellow-400" />
           ))}
         </div>
-        <p className="text-gray-700">{content}</p>
+        <h2 className="text-xl font-semibold mb-2 font-segoe">{name}</h2>
+        <p className="text-sm text-gray-600 text-center font-segoe">
+          It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking at its layout. The point of
+          using Lorem Ipsum is that it has a more-or-less normal distribution of
+          letters.
+        </p>
       </div>
     </div>
   );

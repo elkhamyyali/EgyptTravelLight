@@ -78,6 +78,7 @@ const PricePlanCard: React.FC<{
   );
 };
 
+
 // PricePlans Component
 const PricePlans: React.FC<{ DetailTour: DetailTour }> = ({ DetailTour }) => {
   return (

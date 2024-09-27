@@ -1,33 +1,32 @@
 import Image, { StaticImageData } from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 type ExcursionCardProps = {
-  imageSrc: StaticImageData;
   recommendation: string;
 };
 
-const ExcursionCard: React.FC<ExcursionCardProps> = ({
-  imageSrc,
-  recommendation,
-}) => (
-  <div
-    className="rounded-lg ml-3 cursor-pointer overflow-hidden shadow-md border border-transparent hover:border-yellow-500 transition-border duration-300 ease-in-out"
-    style={{ width: "90%" }} // Reduce card width
-  >
-    <div className="relative w-full" style={{ height: "100px" }}>
-      {" "}
-      {/* Set a fixed height */}
-      <Image
-        src={imageSrc}
-        alt="Excursion"
-        layout="fill" // This will make the image fill the parent div
-        objectFit="cover" // Ensures the image covers the container without distortion
-        className="transition-transform duration-300 ease-in-out hover:scale-105"
-      />
+const ExcursionCard: React.FC<ExcursionCardProps> = ({ recommendation }) => {
+  const [isSelected, setIsSelected] = useState(false);
+
+  const handleSelectChange = () => {
+    setIsSelected(!isSelected);
+  };
+
+  return (
+    <div
+      className={`rounded-lg ml-3 cursor-pointer  overflow-hidden hover:shadow-md border border-blue-500 transition-border duration-300 ease-in-out ${
+        isSelected ? "bg-blue-800 text-white" : ""
+      }`}
+      style={{ width: "90%" }} // Reduce card width
+      onClick={handleSelectChange} // Toggle selection on click
+    >
+      <div className="flex items-center p-2">
+        <p className="text-xs md:text-sm font-medium text-center">
+          {recommendation}
+        </p>
+      </div>
     </div>
-    <p className="p-2 text-xs md:text-sm font-medium">{recommendation}</p>{" "}
-    {/* Adjust padding and font size */}
-  </div>
-);
+  );
+};
 
 export default ExcursionCard;

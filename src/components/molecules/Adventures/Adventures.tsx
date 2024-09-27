@@ -1,66 +1,48 @@
-import React, { useRef } from "react";
+import React from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import { cardData } from "@/data";
-import { FiChevronRight, FiChevronLeft } from "react-icons/fi"; // Importing icons
 
-const NextArrow = ({ onClick }) => (
-  <div
-    className="absolute top-0 lg:block hidden right-4 transform -translate-y-1/2 cursor-pointer  rounded-full p-2"
-    onClick={onClick}
-  >
-    <FiChevronRight size={24} /> {/* Right arrow icon */}
-  </div>
-);
 
-const PrevArrow = ({ onClick }) => (
-  <div
-    className="absolute top-0 right-20 lg:block hidden transform -translate-y-1/2 cursor-pointer rounded-full p-2"
-    onClick={onClick}
-  >
-    <FiChevronLeft size={24} /> {/* Left arrow icon */}
-  </div>
-);
+// Sample Data
+
 
 export default function Adventures() {
-  const sliderRef = useRef<Slider>(null);
-
   const settings = {
-    infinite: false,
+    infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 5, // Show 5 slides at a time
     slidesToScroll: 1,
-    centerMode: false,
-    centerPadding: "0",
-    arrows: false, // Disable default arrows
+    centerMode: false, // Disable center mode for better fit
+    centerPadding: "0", // Remove padding
+    arrows: false,
     draggable: true,
-    // autoplay: true,
-    // autoplaySpeed: 2000,
+    autoplay: true,
+    autoplaySpeed: 2000,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 3, // Adjust for smaller screens
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 2, // Adjust for even smaller screens
         },
       },
     ],
   };
 
   return (
-    <div className="lg:p-10 p-0 relative">
-      {/* Custom Arrows */}
-      <PrevArrow onClick={() => sliderRef.current?.slickPrev()} />
-      <NextArrow onClick={() => sliderRef.current?.slickNext()} />
-
-      <Slider ref={sliderRef} {...settings} className="flex justify-center">
+    <div className="p-">
+      <Slider {...settings} className="flex justify-center">
         {cardData.map((card) => (
-          <div key={card.id} className="flex justify-center px-2">
+          <div
+            key={card.id}
+            className="flex justify-center px-2" // Add horizontal padding between cards
+          >
             <div className="flex flex-col items-center mx-auto hover:rounded-lg relative group">
               {/* Card Container */}
               <div className="flex flex-col items-center mx-auto group relative">

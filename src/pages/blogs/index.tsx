@@ -32,8 +32,8 @@ const BLogs: React.FC<Props> = ({ blogData, Destinations }) => {
     <div>
       <HeroBlog />
       <InterestsSection />
-      {/* <DestinationSection Destinations={Destinations} /> */}
       <BlogSection blogData={blogData} />
+      {/* <DestinationSection Destinations={Destinations} /> */}
     </div>
   );
 };

@@ -29,7 +29,7 @@ const Pagination: React.FC<PaginationProps> = ({ pageCount, onPageChange }) => {
         }
         pageCount={pageCount}
         marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={6}
         onPageChange={onPageChange}
         containerClassName={"flex space-x-1"}
         pageClassName={

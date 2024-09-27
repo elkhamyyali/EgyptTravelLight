@@ -2,16 +2,15 @@ import React from "react";
 import { Radio, Checkbox, Slider, Button } from "@mui/material";
 import FilterSection from "./FilterSection";
 
-// Define the types for your props
 interface LargeScreenSidebarProps {
-  price: [number, number]; // price is a tuple representing the range
+  price: [number, number];
   selectedDestination: string;
   selectedStarRating: string;
   selectedAmenities: string[];
   selectedAccommodationType: string;
   handlePriceChange: (event: Event, newValue: number | number[]) => void;
   handleClearFilters: () => void;
-  handleApplyFilters: () => void; // New prop for apply filters button
+  handleApplyFilters: () => void;
   setSelectedDestination: (destination: string) => void;
   setSelectedStarRating: (rating: string) => void;
   setSelectedAmenities: React.Dispatch<React.SetStateAction<string[]>>;
@@ -26,7 +25,7 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
   selectedAccommodationType,
   handlePriceChange,
   handleClearFilters,
-  handleApplyFilters, // Destructure the new prop
+  handleApplyFilters,
   setSelectedDestination,
   setSelectedStarRating,
   setSelectedAmenities,
@@ -46,17 +45,21 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
       </div>
 
       {/* Destination Filter */}
-      <FilterSection title="Destinations" defaultOpen={true}>
+      <FilterSection title="Destinations">
         <div className="space-y-2">
           {["Spain", "Italy", "Greece", "Turkey", "Croatia"].map((country) => (
-            <div key={country} className="flex items-center">
+            <div
+              key={country}
+              className="flex items-center cursor-pointer"
+              onClick={() => setSelectedDestination(country)}
+            >
               <Radio
                 checked={selectedDestination === country}
-                onChange={() => setSelectedDestination(country)}
+                // Prevent div click when clicking on radio
                 sx={{
-                  color: "black",
+                  color: "#9D6C1E",
                   "&.Mui-checked": {
-                    color: "black",
+                    color: "#9D6C1E",
                   },
                 }}
               />
@@ -76,12 +79,12 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
             min={0}
             max={1000}
             sx={{
-              color: "black",
+              color: "#9D6C1E",
               "& .MuiSlider-thumb": {
-                backgroundColor: "black",
+                backgroundColor: "#9D6C1E",
               },
               "& .MuiSlider-rail": {
-                backgroundColor: "black",
+                backgroundColor: "#9D6C1E",
               },
             }}
           />
@@ -97,14 +100,18 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
         <div className="space-y-2">
           {["5 stars", "4 stars", "3 stars", "2 stars", "1 star"].map(
             (rating) => (
-              <div key={rating} className="flex items-center">
+              <div
+                key={rating}
+                className="flex items-center cursor-pointer"
+                onClick={() => setSelectedStarRating(rating)}
+              >
                 <Checkbox
                   checked={selectedStarRating === rating}
-                  onChange={() => setSelectedStarRating(rating)}
+                  // Prevent div click when clicking on checkbox
                   sx={{
-                    color: "black",
+                    color: "#9D6C1E",
                     "&.Mui-checked": {
-                      color: "black",
+                      color: "#9D6C1E",
                     },
                   }}
                 />
@@ -125,20 +132,24 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
             "Room service",
             "Fitness center",
           ].map((amenity) => (
-            <div key={amenity} className="flex items-center">
+            <div
+              key={amenity}
+              className="flex items-center cursor-pointer"
+              onClick={() =>
+                setSelectedAmenities((prev) =>
+                  prev.includes(amenity)
+                    ? prev.filter((item) => item !== amenity)
+                    : [...prev, amenity]
+                )
+              }
+            >
               <Checkbox
                 checked={selectedAmenities.includes(amenity)}
-                onChange={() => {
-                  setSelectedAmenities((prev) =>
-                    prev.includes(amenity)
-                      ? prev.filter((item) => item !== amenity)
-                      : [...prev, amenity]
-                  );
-                }}
+                // Prevent div click when clicking on checkbox
                 sx={{
-                  color: "black",
+                  color: "#9D6C1E",
                   "&.Mui-checked": {
-                    color: "black",
+                    color: "#9D6C1E",
                   },
                 }}
               />
@@ -153,14 +164,18 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
         <div className="space-y-2">
           {["Hotel", "Apartment", "Resort", "Villa", "Bed & Breakfast"].map(
             (type) => (
-              <div key={type} className="flex items-center">
+              <div
+                key={type}
+                className="flex items-center cursor-pointer"
+                onClick={() => setSelectedAccommodationType(type)}
+              >
                 <Checkbox
                   checked={selectedAccommodationType === type}
-                  onChange={() => setSelectedAccommodationType(type)}
+                  // Prevent div click when clicking on checkbox
                   sx={{
-                    color: "black",
+                    color: "#9D6C1E",
                     "&.Mui-checked": {
-                      color: "black",
+                      color: "#9D6C1E",
                     },
                   }}
                 />
@@ -174,7 +189,7 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
       {/* Apply Filters Button */}
       <div className="mt-4">
         <Button
-          className="bg-black hover:bg-gray-900 text-white w-full"
+          className="bg-custom-gradient text-white w-full"
           onClick={handleApplyFilters}
         >
           Apply Filters

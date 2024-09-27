@@ -4,6 +4,9 @@ import { AppCacheProvider } from "@mui/material-nextjs/v13-pagesRouter";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const theme = createTheme({
   typography: {
     // fontFamily: Roboto.style.fontFamily,
@@ -24,6 +27,7 @@ export default function App(props: AppProps) {
           <Layout>
             <Component {...pageProps} />
           </Layout>
+            <ToastContainer />
         </ThemeProvider>
       </AppCacheProvider>
     </QueryClientProvider>

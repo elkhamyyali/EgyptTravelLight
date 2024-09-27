@@ -55,10 +55,7 @@ const Explore: React.FC = () => {
             <div key={excursion.id} className="">
               {" "}
               {/* Add padding for card spacing */}
-              <ExcursionCard
-                imageSrc={excursion.imageSrc}
-                recommendation={excursion.recommendation}
-              />
+              <ExcursionCard recommendation={excursion.recommendation} />
             </div>
           ))}
         </Slider>

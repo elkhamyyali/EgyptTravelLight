@@ -2,6 +2,7 @@ import React from "react";
 import BLogData from "@/components/molecules/BlogDetails/BLogData";
 import HeroSectionBlogs from "@/components/molecules/BlogDetails/HeroBlogDetails";
 import RelatedTours from "@/components/molecules/BlogDetails/RelatedTours";
+import Blog from "@/components/molecules/Blogs/Blog";
 import fetchData from "@/helper/FetchData";
 import { GetServerSidePropsContext } from "next";
 import RelatedBlog from "@/components/molecules/Blogs/RelatedBlog";

@@ -19,7 +19,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   name,
   imageUrl,
 }) => (
-  <div className="relative rounded-lg overflow-hidden group md:w-[310px] w-[310px] h-48 mx-auto md:mx-2 my-2">
+  <div className="relative rounded-lg overflow-hidden group md:w-[310px] w-[310px] h-60 mx-auto md:mx-2 my-2">
     <Image
       src={imageUrl || defaultImage} // Use default image if imageUrl is empty
       alt={name}

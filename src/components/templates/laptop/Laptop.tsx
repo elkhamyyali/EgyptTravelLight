@@ -11,7 +11,7 @@ interface LaptopProps {
 
 const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
   // State management for filters
-  const [price, setPrice] = useState<[number, number]>([0, 1000]);
+  const [price, setPrice] = useState<[number, number]>([120, 800]);
   const [selectedDestination, setSelectedDestination] =
     useState<string>("Spain");
   const [selectedStarRating, setSelectedStarRating] =
@@ -50,7 +50,7 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
   };
 
   return (
-    <div className="p-6 bg-[#FAFAFA]">
+    <div className=" bg-[#FAFAFA]">
       {/* Search Bar */}
       <div className="mt-20">
         <SearchInput />
@@ -59,7 +59,7 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
       {/* Main Content Layout: Filters on the left, Cards on the right */}
       <div className="flex flex-col md:flex-row gap-8 mt-8">
         {/* Filters Sidebar */}
-        <div className="w-full md:w-1/4">
+        <div className="w-full md:w-1/4 ">
           <LargeScreenSidebar
             price={price}
             selectedDestination={selectedDestination}

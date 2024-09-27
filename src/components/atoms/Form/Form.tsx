@@ -1,134 +1,177 @@
-import React, { useState, useRef, useEffect, MouseEvent } from "react";
-import { Button } from "@mui/material";
-import { BsLuggageFill } from "react-icons/bs";
-import { FaBus } from "react-icons/fa";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
+import React, { useState } from "react";
+import { FiSearch, FiX } from "react-icons/fi";
+import { Autocomplete, TextField, Modal, Button } from "@mui/material";
+import DatePickerInput from "../SearchExcursions/DatePickerInput";
+import dayjs from "dayjs";
 
-// Type for the selected date
-type DateType = Date | undefined;
+const destinations = [
+  { label: "New York", id: 1 },
+  { label: "Paris", id: 2 },
+  { label: "Tokyo", id: 3 },
+  { label: "London", id: 4 },
+  { label: "Sydney", id: 5 },
+];
 
-export default function BluerForm() {
-  const [selectedDate, setSelectedDate] = useState<DateType>(undefined);
-  const [showCalendar, setShowCalendar] = useState<boolean>(false);
-  const [activeInput, setActiveInput] = useState<string | null>(null);
-  const calendarRef = useRef<HTMLDivElement | null>(null);
+export default function SearchForm() {
+  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
+  const [location, setLocation] = useState<string>("");
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const handleInputClick = (inputType: string) => {
-    setActiveInput(inputType);
-    setShowCalendar(true);
+  const handleDateChange = (newValue: dayjs.Dayjs | null) => {
+    setSelectedDate(newValue);
   };
 
-  const handleDayClick = (day: Date | undefined) => {
-    if (day) {
-      setSelectedDate(day);
-      setShowCalendar(false);
-    }
+  const toggleForm = () => {
+    setIsFormOpen(!isFormOpen);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: Event) => {
-      if (
-        calendarRef.current &&
-        !calendarRef.current.contains(event.target as Node)
-      ) {
-        setShowCalendar(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [calendarRef]);
+  const handleSearch = () => {
+    // Handle search logic here
+    console.log(
+      "Searching for:",
+      location,
+      "on",
+      selectedDate?.format("MM/DD/YYYY")
+    );
+    toggleForm(); // Close the modal after searching
+  };
+  const handleSearchDesktop = () => {
+    // Handle search logic here
+    console.log(
+      "Searching for:",
+      location,
+      "on",
+      selectedDate?.format("MM/DD/YYYY")
+    );
+  };
 
   return (
-    <div className="absolute top-1/2 sm:left-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:w-full w-4/5 max-w-sm p-4 backdrop-blur-md bg-white/30 rounded-md">
-      <div className="py-4 px-2">
-        <p className="text-start text-md text-white mb-4">
-          Explore the best of Egypt adventure
-        </p>
+    <>
+      <div className="lg:hidden">
+        <div
+          className="bg-white rounded-full shadow-lg p-4 flex items-center cursor-pointer"
+          onClick={toggleForm}
+        >
+          <FiSearch className="text-gray-500 mr-2" />
+          <span className="text-gray-500">Search for a place or activity</span>
+        </div>
 
-        <form className="space-y-3 relative">
-          <div className="flex flex-row space-x-2 mb-3">
-            <div className="relative flex-1">
-              <BsLuggageFill className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500" />
-              <input
-                type="text"
-                placeholder="Tour Package"
-                className={`w-full pl-10 pr-3 py-2 ${
-                  activeInput === "tour" ? "bg-[#FFF3C5]" : "bg-white"
-                } border border-[#FFF3C5] rounded-md focus:outline-none focus:ring-2 text-sm`}
-                onClick={() => handleInputClick("tour")}
-                readOnly
-                value={
-                  activeInput === "tour" && selectedDate
-                    ? selectedDate.toDateString()
-                    : ""
-                }
-              />
-            </div>
-
-            <div className="relative flex-1">
-              <FaBus className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-              <input
-                type="text"
-                placeholder="Excursions"
-                className={`w-full pl-10 pr-3 py-2 ${
-                  activeInput === "excursion" ? "bg-[#FFF3C5]" : "bg-white"
-                } border border-[#FFF3C5] rounded-md focus:outline-none focus:ring-2 text-sm`}
-                onClick={() => handleInputClick("excursion")}
-                readOnly
-                value={
-                  activeInput === "excursion" && selectedDate
-                    ? selectedDate.toDateString()
-                    : ""
-                }
-              />
+        <Modal
+          open={isFormOpen}
+          onClose={toggleForm}
+          aria-labelledby="search-modal-title"
+          aria-describedby="search-modal-description"
+        >
+          <div className="fixed inset-0 h-[325px] bg-white z-50 overflow-y-auto px-2">
+            <div className="container mx-auto p-5">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold">Search</h2>
+                <button onClick={toggleForm} className="text-gray-500">
+                  <FiX size={24} />
+                </button>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label
+                    htmlFor="mobile-destination"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Where to?
+                  </label>
+                  <Autocomplete
+                    id="mobile-destination"
+                    options={destinations}
+                    getOptionLabel={(option) => option.label}
+                    onChange={(event, newValue) => {
+                      setLocation(newValue?.label || "");
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        variant="outlined"
+                        placeholder="Search for a place or activity"
+                        fullWidth
+                      />
+                    )}
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="mobile-date"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    When?
+                  </label>
+                  <DatePickerInput
+                    selectedDate={selectedDate}
+                    onDateChange={handleDateChange}
+                    width="100%"
+                    height="56px"
+                    labelProps={{
+                      fontSize: "16px",
+                      color: "rgba(0, 0, 0, 0.6)",
+                      transform: "translate(14px, 16px) scale(1)",
+                    }}
+                  />
+                </div>
+                <Button
+                  className="bg-blue-900 text-white hover:bg-blue-300 hover:text-black"
+                  fullWidth
+                  onClick={handleSearch}
+                >
+                  Search
+                </Button>
+              </div>
             </div>
           </div>
-
-          {showCalendar && (
-            <div
-              ref={calendarRef}
-              className="absolute left-0 top-10 mt-2 bg-white rounded-md shadow-lg z-50 px-3"
-            >
-              <DayPicker
-                mode="single"
-                selected={selectedDate}
-                onDayClick={handleDayClick} // Updated prop for clicking days
-                fromMonth={activeInput === "excursion" ? new Date() : undefined}
-                toMonth={activeInput === "excursion" ? undefined : new Date()}
-                // Remove showMonthPicker
-              />
-            </div>
-          )}
-
-          <div className="relative mb-3">
-            <select className="w-full px-3 py-2 border border-[#FFF3C5] rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
-              <option value="Luxor">Luxor</option>
-              <option value="Hurghada">Hurghada</option>
-              <option value="Sharm">Sharm</option>
-              <option value="Marsa alam">Marsa alam</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:space-x-2">
-            <div className="flex-1 mb-3 sm:mb-0">
-              <input
-                type="text"
-                placeholder="Enter Date"
-                className="w-full px-3 py-2 border border-[#FFF3C5] rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm"
-                value={selectedDate ? selectedDate.toDateString() : ""}
-                readOnly
-              />
-            </div>
-            <Button className="w-full capitalize sm:w-auto py-2 text-white px-3 bg-custom-gradient font-segoe rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
-              Search
-            </Button>
-          </div>
-        </form>
+        </Modal>
       </div>
-    </div>
+      <div className="hidden lg:block mt-14">
+        <div className="flex bg-white rounded-full shadow-lg overflow-hidden w-full max-w-3xl mx-auto">
+          <div className="flex flex-1 items-center p-4">
+            <Autocomplete
+              id="destination"
+              options={destinations}
+              getOptionLabel={(option) => option.label}
+              onChange={(event, newValue) => setLocation(newValue?.label || "")}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="standard"
+                  placeholder="Search for a place or activity"
+                  fullWidth
+                  InputProps={{
+                    ...params.InputProps,
+                    disableUnderline: true,
+                    className: "bg-transparent text-gray-600",
+                  }}
+                />
+              )}
+              className="w-full"
+            />
+          </div>
+          <div className="border-l border-gray-300"></div>
+          <div className="flex flex-1 items-center p-4">
+            <DatePickerInput
+              selectedDate={selectedDate}
+              onDateChange={handleDateChange}
+              width="100%"
+              height="40px"
+              labelProps={{
+                fontSize: "14px",
+                color: "rgba(0, 0, 0, 0.6)",
+                transform: "translate(14px, 12px) scale(1)",
+              }}
+            />
+          </div>
+          <button
+            onClick={handleSearchDesktop}
+            className="bg-blue-500 hover:bg-blue-600 p-4 flex items-center justify-center"
+          >
+            <FiSearch className="text-white text-2xl" />
+          </button>
+        </div>
+      </div>
+    </>
   );
 }

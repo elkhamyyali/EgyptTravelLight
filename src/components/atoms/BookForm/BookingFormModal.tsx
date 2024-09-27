@@ -10,7 +10,7 @@ import SelectNationality from "@/components/molecules/selects/SelectNationality"
 import Dropdown from "./Dropdown";
 import DatePickerModal from "@/components/molecules/dataPicker";
 import { useMutate } from "@/hooks/UseMutate";
-import { notify } from "../../../utils/toast";
+import { notify } from "@/utils/toast";
 import { Spinner } from "../UI/Spinner";
 import Thanks from "@/components/molecules/Thanks";
 import SelectMonth from "@/components/molecules/selects/SelectMonth";
@@ -22,18 +22,18 @@ export default function BookingFormModal({ DetailTour }) {
   const [rangeDays, setRangeDays] = useState(1);
   const [showThanks, setShowThanks] = useState(false);
 
-  const { mutate, isPending } = useMutate({
-    mutationKey: ["bookings"],
-    endpoint: `bookings`,
-    onSuccess: () => {
-      setIsModalOpen(false); // Close the form modal after success
-      setShowThanks(true); // Show the Thanks modal
-    },
-    onError: (err) => {
-      notify("error", err?.response?.data?.message);
-    },
-    formData: true,
-  });
+const { mutate, isPending } = useMutate({
+  mutationKey: ["bookings"],
+  endpoint: `bookings`,
+  onSuccess: () => {
+    setIsModalOpen(false); // Close the form modal after success
+    setShowThanks(true); // Show the Thanks modal
+  },
+  onError: (err) => {
+    notify("error", err?.response?.data?.message);
+  },
+  formData: true,
+});
 
   const handleDateChange = (date, days) => {
     setSelectedDate(date ? dayjs(date) : null);

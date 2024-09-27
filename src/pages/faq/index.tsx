@@ -151,8 +151,8 @@ const Faq: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row bg-gray-50 min-h-screen mt-16 lg:mt-24">
-      <aside className="w-full md:w-1/4 bg-white p-6 shadow-lg">
+    <div className="flex flex-col pb-4 md:flex-row bg-gray-50 min-h-screen mt-16 lg:mt-[77px]">
+      <aside className="w-full md:w-1/4 bg-white p-6 shadow-lg rounded-lg">
         <h2 className="text-2xl font-segoe text-gray-800 mb-6">FAQ Topics</h2>
 
         {/* Mobile Carousel */}
@@ -161,7 +161,7 @@ const Faq: React.FC = () => {
             {faqData.map((section, index) => (
               <div
                 key={index}
-                className={`cursor-pointer p-2  rounded-lg flex items-center space-x-0 transition-colors duration-200 ${
+                className={`cursor-pointer p-2 rounded-lg flex items-center space-x-0 transition-colors duration-200 ${
                   activeTab === index
                     ? "bg-yellow-100 text-yellow-700"
                     : "text-gray-600 hover:bg-gray-100"
@@ -224,11 +224,13 @@ const Faq: React.FC = () => {
                   <h4 className="text-lg font-segoe text-gray-700 flex-grow">
                     {item.question}
                   </h4>
-                  <ChevronDown
-                    className={`h-5 w-5 text-yellow-500 transition-transform duration-200 ${
-                      openIndex === index ? "rotate-180" : ""
-                    }`}
-                  />
+                  <div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-yellow-500 transition-transform duration-200 ${
+                        openIndex === index ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
                 </div>
                 {openIndex === index && (
                   <p className="mt-3 text-gray-600 font-segoe">{item.answer}</p>

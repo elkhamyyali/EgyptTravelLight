@@ -8,8 +8,9 @@ interface HomeProps {
 }
 
 export default function Home({ toursData }: HomeProps) {
+  console.log("🚀 ~ Home ~ toursData:", toursData)
   return (
-    <div className="md:p-6 p-0 bg-[#FAFAFA]">
+    <div className=" lg:p-3 bg-[#FAFAFA]">
       {/* Mobile view */}
       <div className="block lg:hidden">
         <Mobile toursData={toursData} />

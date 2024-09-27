@@ -14,7 +14,7 @@ type PrivacyPolicyItem = {
 const PrivacyPolicySection: React.FC = ({data}) => {
   return (
     <>
-      <div className="relative bg-gradient-to-r mt-16 lg:mt-24 from-gray-900 to-gray-800 py-16 font-[sans-serif]">
+      <div className="relative bg-gradient-to-r mt-14 lg:mt-16 from-gray-900 to-gray-800 py-16 font-[sans-serif]">
         <div className="absolute inset-0">
           <Image
             src={PrivacyImage}
@@ -35,7 +35,7 @@ const PrivacyPolicySection: React.FC = ({data}) => {
         </div>
       </div>
 
-      <div className="bg-white px-6 font-segoe mt-2">
+      <div className="bg-white lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4 font-segoe mt-2">
         <div className="grid gap-10">
           <div className="mt-4">
             <p

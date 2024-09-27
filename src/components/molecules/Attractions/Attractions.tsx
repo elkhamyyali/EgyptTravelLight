@@ -19,7 +19,7 @@ const AttractionCard: React.FC<Attraction> = ({
   toursCount,
 }) => {
   return (
-    <div className="flex items-center cursor-pointer rounded-lg overflow-hidden md:w-80 w-72 md:mx-0 ml-28 h-24 transition-transform duration-300 ease-in-out hover:border border-gray-200 hover:bg-white">
+    <div className="flex items-center cursor-pointer rounded-lg overflow-hidden md:w-80 w-72 md:mx-0 ml-28 h-24 transition-transform duration-300 ease-in-out hover:shadow-lg hover:border border-gray-200 hover:bg-white">
       <div className="w-24 h-24 relative flex-shrink-0 overflow-hidden">
         <Image
           src={imageSrc}
@@ -40,6 +40,8 @@ const AttractionCard: React.FC<Attraction> = ({
     </div>
   );
 };
+
+
 
 const Attractions: React.FC = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -91,7 +93,7 @@ const Attractions: React.FC = () => {
           ))}
         </Slider>
       ) : (
-        <div className="grid grid-cols-3 gap-4 mb-3">
+        <div className="grid grid-cols-3 gap-4">
           {sampleAttractions.map((attraction) => (
             <div className="flex justify-center" key={attraction.id}>
               <AttractionCard {...attraction} />

@@ -1,18 +1,10 @@
 import React, { useState } from "react";
 import { ChevronDown, Search } from "lucide-react";
-import {
-  Modal,
-  Slide,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
+import { Modal, Slide } from "@mui/material";
 
 const SearchInput = () => {
   const [location, setLocation] = useState("Where");
   const [month, setMonth] = useState("");
-  const [option, setOption] = useState("");
   const [isMonthDropdownOpen, setIsMonthDropdownOpen] = useState(false);
   const [isLocationDropdownOpen, setIsLocationDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,7 +24,6 @@ const SearchInput = () => {
     "November",
     "December",
   ];
-  const options = ["Packages", "Nile Cruise", "Excursions"];
 
   return (
     <div className="relative">
@@ -69,10 +60,8 @@ const SearchInput = () => {
             </div>
           )}
         </div>
-
         {/* Separator */}
         <div className="w-px bg-gray-300 h-8 hidden md:block"></div>
-
         {/* Month Input with Dropdown */}
         <div className="relative flex-1">
           <input
@@ -87,12 +76,12 @@ const SearchInput = () => {
           <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-transparent" />
           {isMonthDropdownOpen && (
             <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
-              <div className="grid grid-cols-2 p-3 ">
+              <div className="grid grid-cols-2 gap-1 p-2">
                 <div className="flex flex-col">
                   {months.slice(0, 6).map((m) => (
                     <div
                       key={m}
-                      className=" p-2 cursor-pointer font-segoe text-sm"
+                      className="px-4 py-2 hover:bg-yellow-200 cursor-pointer font-segoe text-sm"
                       onClick={() => {
                         setMonth(m);
                         setIsMonthDropdownOpen(false);
@@ -106,7 +95,7 @@ const SearchInput = () => {
                   {months.slice(6).map((m) => (
                     <div
                       key={m}
-                      className=" p-2 cursor-pointer font-segoe text-sm"
+                      className="px-4 py-2 hover:bg-yellow-200 cursor-pointer font-segoe text-sm"
                       onClick={() => {
                         setMonth(m);
                         setIsMonthDropdownOpen(false);
@@ -120,31 +109,12 @@ const SearchInput = () => {
             </div>
           )}
         </div>
-
-        {/* Dropdown for Options */}
-        <FormControl size="small" margin="dense" className="flex-1">
-          <InputLabel id="option-label">Options</InputLabel>
-          <Select
-            labelId="option-label"
-            value={option}
-            onChange={(e) => setOption(e.target.value)}
-            label="Options"
-          >
-            {options.map((opt) => (
-              <MenuItem key={opt} value={opt}>
-                {opt}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
         {/* Search Button */}
         <button className="bg-[#232323] text-white font-segoe rounded-md px-4 py-2 flex items-center text-center justify-center w-full md:w-auto">
           <Search className="mr-2 w-5 h-5" />
           Search
         </button>
       </div>
-
       <div className="relative md:hidden w-full">
         <input
           type="text"

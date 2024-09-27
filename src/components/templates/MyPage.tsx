@@ -23,18 +23,16 @@ const MyPage: React.FC<MyPageProps> = ({ DetailTour }) => {
         mainContent={DetailTour.description}
         images={DetailTour.images}
       />
-      <div className="p-4 lg:p-0">
-        <TripInfo DetailTour={DetailTour} />
-      </div>
-      <div className="p-4 lg:p-0">
+
+      {/* <div className="p-4 lg:p-0">
         <Included DetailTour={DetailTour} />
         <TourItinerary DetailTour={DetailTour} />
         <PricePlans DetailTour={{ tour_prices: DetailTour.tour_prices }} />
-        {/* <UserProfilePage /> */}
+        <UserProfilePage />
         <FAQ DetailTour={DetailTour} />
-        {/* <Reviews /> */}
+        <Reviews />
         <RandomButtons DetailTour={{ tags: DetailTour.tags }} />
-      </div>
+      </div> */}
     </div>
   );
 };

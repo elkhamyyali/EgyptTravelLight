@@ -4,7 +4,7 @@ import SearchModal from "./SearchModal";
 import Button from "@mui/material/Button";
 import { Search } from "lucide-react";
 import dayjs from "dayjs";
-import DatePickerInput from "./DatePickerInput";
+import DatePickerInput from "./DatePickerInput"; // Import the new component
 
 type DateRange = [Date | null, Date | null];
 
@@ -54,7 +54,7 @@ const SearchExcursions: React.FC = () => {
           }}
         />
 
-        <button className="hidden sm:block bg-[#232323] text-white font-segoe rounded-md px-4 py-2 flex items-center text-center justify-center">
+        <button className="hidden sm:block bg-[#4435c9] text-white font-segoe rounded-md px-4 py-2 flex items-center text-center justify-center">
           Search
         </button>
       </div>

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Calendar, Globe, Heart, MapPin, Users } from "lucide-react";
-import defaultImage from "../../../../public/assets/Secondimage.jpeg"; // Import your default image
+import defaultImage from "../../../../public/assets/Secondimage.jpeg";
 import Link from "next/link";
 import { Button } from "@mui/material";
 import { ToursData } from "@/types/tour"; // Import from your types file
 import Pagination from "../Pagination"; // Import the Pagination component
 import Image from "next/image";
-import { FaWhatsapp } from "react-icons/fa";
+
 interface TravelPackagePageProps {
   toursData: ToursData;
 }
 
 const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
-  console.log("🚀 ~ toursData:", toursData);
+  const [hoveredCardId, setHoveredCardId] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const toursPerPage = 6;
 
@@ -26,30 +26,32 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
   const pageCount = Math.ceil(toursData.data.length / toursPerPage);
 
   return (
-    <div className="w-full">
-      <div className="grid grid-cols-1 gap-6 mt-3 lg:mt-0">
+    <div className="w-full lg:mt-0 mt-3">
+      <div className="grid grid-cols-1 gap-6">
         {currentTours.map((pkg) => (
           <Link href={`/top-packages/${pkg.id}`} key={pkg.id}>
-            <div className="w-full bg-white rounded-md border-gray-300 border overflow-hidden  transition-shadow duration-300 hover:shadow-xl cursor-pointer">
+            <div
+              className="w-full bg-white rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 hover:shadow-sm cursor-pointer"
+              onMouseEnter={() => setHoveredCardId(pkg.id)}
+              onMouseLeave={() => setHoveredCardId(null)}
+            >
               <div className="flex flex-col md:flex-row">
-                <div className="w-full md:w-2/6 p-3 h-64 md:h-auto relative">
+                <div className="w-full md:w-2/6 h-64 md:h-auto relative overflow-hidden">
                   <Image
-                    src={pkg.main_image.url || defaultImage} // Use default image if main_image is not available
+                    src={pkg.main_image.url || defaultImage}
                     alt={pkg.title}
-                    width={100}
-                    height={100}
-                    className="rounded-md  w-full h-full"
+                    layout="fill"
+                    objectFit="cover"
+                    className={`transition-transform duration-500 ease-in-out ${
+                      hoveredCardId === pkg.id ? "scale-105" : "scale-100"
+                    }`}
                   />
-                  <div className="absolute top-5 left-5 bg-green-500 text-white px-3 py-1 text-sm font-segoe rounded-sm shadow-md">
+                  <div className="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 text-sm font-segoe rounded-sm shadow-md">
                     Special Offer 20%
                   </div>
-                  <button className="absolute top-5 right-5 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-200 group">
+                  <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-200 group">
                     <Heart className="w-5 h-5 text-gray-600 group-hover:text-red-500" />
                   </button>
-                  {/* <button className="absolute bottom-3 left-3 bg-white text-gray-700 px-4 py-2 text-sm font-segoe rounded-sm shadow-md hover:bg-gray-100 transition-colors duration-200 flex items-center space-x-1">
-                    <MapPin className="w-4 h-4" />
-                    <span>View on map</span>
-                  </button> */}
                 </div>
                 <div className="w-full md:w-4/6 p-6 flex flex-col justify-between">
                   <div>
@@ -97,28 +99,19 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                   </div>
                   <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
                     <div className="text-center sm:text-left">
-                      {/* <p className="text-sm text-gray-600">From ${pkg.price}</p> */}
                       <p className="text-black font-segoe text-3xl">
                         ${pkg.min_price}
                       </p>
                       <p className="text-sm text-gray-600">Per Person</p>
                     </div>
-                    <div className="flex sm:flex-row sm:space-y-0 sm:space-x-2">
-                      <Button className="bg-black capitalize mr-3 md:mr-0 text-white font-segoe sm:py-2 px-3 sm:px-6 rounded-sm transition duration-300 ease-in-out transform hover:bg-gray-700 hover:scale-105 w-full sm:w-auto">
+                    <div className="flex lg:w-auto w-full sm:flex-row sm:space-y-0 sm:space-x-2">
+                      <Button className="bg-custom-gradient capitalize mr-3 md:mr-0 text-white font-segoe sm:py-2 px-3 sm:px-6 rounded-sm transition duration-300 ease-in-out transform hover:bg-yellow-700 hover:scale-105 w-full sm:w-auto">
                         View tour
                       </Button>
 
-                      <Button className="border bg-green-300 md:mx-0  px-5 md:px-2 text-nowrap border-green-600 text-green-900 hover:bg-green-50 font-segoe sm:py-2 sm:px-6 rounded-sm transition duration-300 ease-in-out transform hover:scale-105 w-full sm:w-auto">
-                        Whats App{" "}
-                        <div>
-                          <span>
-                            <FaWhatsapp
-                              className="text-green-900 ml-3"
-                              size={20}
-                            />
-                          </span>
-                        </div>
-                      </Button>
+                      <button className="border md:mx-0 mx-1 px-2 md:px-2 text-nowrap border-custom-gradient text-custom-gradient hover:bg-yellow-50 font-segoe sm:py-2 sm:px-6 rounded-sm transition duration-300 ease-in-out transform hover:scale-105 w-full sm:w-auto">
+                        Download brochure
+                      </button>
                     </div>
                   </div>
                 </div>

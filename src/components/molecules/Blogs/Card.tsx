@@ -32,8 +32,8 @@ const Card: React.FC<CardProps> = ({
             height={320}
             className="w-full h-80 object-cover"
           />
-          <div className="absolute bottom-0 left-0 font-segoe right-0 h-28 lg:h-20 bg-white">
-            <div className="absolute bottom-0 left-0 p-4 text-black">
+          <div className="absolute bottom-0 left-0 font-segoe right-0 h-28 lg:h-20 bg-white/30 backdrop-blur-md">
+            <div className="absolute bottom-0 left-0 p-4 text-white">
               <h2 className="text-base md:text-xl font-sego">{title}</h2>
               {/* <p className="text-sm">{content}</p> */}
               <p className="text-xs">

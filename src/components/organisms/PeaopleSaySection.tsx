@@ -5,14 +5,14 @@ type Props = {};
 
 const PeopleSaySection = (props: Props) => {
   return (
-    <div className="bg-white pb-5 ">
-      <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer md:p-10 p-5">
+    <>
+      <div className="text-center text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer md:p-10 p-5">
         What People Say
       </div>
-      <div className="cursor-pointer">
+      <div>
         <PeopleSay />
       </div>
-    </div>
+    </>
   );
 };
 

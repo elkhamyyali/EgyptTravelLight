@@ -70,36 +70,6 @@ export const cardData = [
     title: "Explore",
     hoverText: "Uncover Secrets",
   },
-  {
-    id: 1,
-    image: First,
-    title: "Solo",
-    hoverText: "Discover Solitude",
-  },
-  {
-    id: 2,
-    image: Second,
-    title: "Adventure",
-    hoverText: "Seek Thrills",
-  },
-  {
-    id: 3,
-    image: Third,
-    title: "Explore",
-    hoverText: "Uncover Secrets",
-  },
-  {
-    id: 4,
-    image: Third,
-    title: "Explore",
-    hoverText: "Uncover Secrets",
-  },
-  {
-    id: 5,
-    image: Third,
-    title: "Explore",
-    hoverText: "Uncover Secrets",
-  },
   // Add more cards as needed
 ];
 
@@ -637,44 +607,63 @@ export const excursions = [
     {
       id: 1,
       imageSrc: Exp,
-      recommendation: "Travelers recommend",
+      recommendation: "Travelers",
     },
     {
       id: 2,
       imageSrc: Exp,
-      recommendation: "Travelers recommend",
+      recommendation: "Travelers",
     },
     {
       id: 3,
       imageSrc: Exp,
-      recommendation: "Travelers recommend",
+      recommendation: "Travelers",
     },
     {
       id: 4,
       imageSrc: Exp,
-      recommendation: "Travelers recommend",
+      recommendation: "Travelers",
+    },
+    {
+      id: 5,
+      imageSrc: Exp,
+      recommendation: "Travelers",
+    },
+    {
+      id: 6,
+      imageSrc: Exp,
+      recommendation: "Travelers",
     },
     {
       id: 1,
       imageSrc: Exp,
-      recommendation: "Travelers recommend",
+      recommendation: "Travelers",
     },
     {
       id: 2,
       imageSrc: Exp,
-      recommendation: "Travelers recommend",
+      recommendation: "Travelers",
     },
     {
       id: 3,
       imageSrc: Exp,
-      recommendation: "Travelers recommend",
+      recommendation: "Travelers",
     },
     {
       id: 4,
       imageSrc: Exp,
-      recommendation: "Travelers recommend",
+      recommendation: "Travelers",
     },
-
+    {
+      id: 5,
+      imageSrc: Exp,
+      recommendation: "Travelers",
+    },
+    {
+      id: 6,
+      imageSrc: Exp,
+      recommendation: "Travelers",
+    },
 ];
   
 

@@ -117,7 +117,7 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({
               setFieldValue("duration", rangeDays);
             }}
             variant="contained"
-            className="bg-custom-gradient"
+            className="bg-blue-700"
           >
             Apply
           </Button>

@@ -36,18 +36,18 @@ const Tours: React.FC<ToursProps> = ({ toursData }) => {
   };
 
   return (
-    <div className="relative m-0 md:p-2">
+    <div className="relative m-0">
       <Slider {...settings} className="w-full">
-        {toursData.data.map(
+        {toursData?.data?.map(
           (attraction) =>
-            attraction.is_best_deal === 1 && (
+            attraction?.is_best_deal === 1 && (
               <AttractionCard
                 key={attraction.id} // Use a unique key
                 id={attraction.id} // Pass the id prop
                 title={attraction.title}
                 location={attraction.location}
                 price={attraction.min_price}
-                image={attraction.main_image}
+                image={attraction.main_image.url}
                 rating={2} // Pass the rating prop
                 duration={attraction.duration} // Pass duration prop
                 ageRange={attraction.age_range} // Pass age range prop

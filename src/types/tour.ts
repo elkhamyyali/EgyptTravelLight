@@ -9,10 +9,10 @@ export interface TourPackage {
   destination: string;
   price: number;
   starRating: number;
-  amenities: string[];
-  main_image: StaticImageData;
-  accommodationType: string;
   tour_prices: any;
+  amenities: string[];
+  accommodationType: string;
+  main_image: StaticImageData;
   description?: string;
   duration: string;
   age_range: string;

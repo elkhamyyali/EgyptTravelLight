@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { CiGlobe } from "react-icons/ci";
-import {
-  AiOutlineLogin,
-  AiOutlineMenuFold,
-  AiOutlineSearch,
-} from "react-icons/ai"; // Import login and search icons
+import Logo from "../../../../public/assets/srayaLogo.png";
 import { MobileMenu } from "./MobileMenu";
 import { useRouter } from "next/router";
 
@@ -33,18 +30,23 @@ export const Header = ({ header, className }: HeaderProps_TP) => {
       }
 
       if (window.innerWidth >= 1024) {
-        let lastScrollTop = 0;
+        // Apply scroll effect on large screens
         if (scrollTop > lastScrollTop) {
+          // User is scrolling down
           setIsFixed(false);
         } else if (scrollTop < lastScrollTop || scrollTop === 0) {
+          // User is scrolling up or at the top
           setIsFixed(true);
         }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
       } else {
+        // Always fixed on mobile devices
         setIsFixed(true);
       }
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     };
 
+    let lastScrollTop = 0;
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -56,76 +58,76 @@ export const Header = ({ header, className }: HeaderProps_TP) => {
   return (
     <>
       <header
-        className={`${
-          isFixed ? "fixed" : "relative"
-        } bg-white shadow-md top-0 w-full font-sans tracking-wide z-40 sm:px-16 px-4 transition-transform duration-500 ease-in-out transform ${
-          isFixed ? "translate-y-0" : "-translate-y-full"
-        } ${className}`}
+        className={`
+          ${isFixed ? "fixed" : "relative"}
+          bg-white shadow-md top-0 w-full font-sans tracking-wide z-40 sm:px-16 px-4
+          transition-transform duration-500 ease-in-out transform ${
+            isFixed ? "translate-y-0" : "-translate-y-full"
+          } ${className}
+        `}
       >
-        <div className="grid grid-cols-2 lg:grid-cols-3 items-center">
-          {/* Logo */}
-          <Link href="/" className="p-6">
-            <div className="text-nowrap">Egypt Raisen Tours</div>
+        <div className="flex items-center justify-between  ">
+          <Link href="/">
+            <div className="py-5">Egypt Travel Lite</div>
           </Link>
 
-          {/* Desktop Navigation Links (Hidden on Mobile) */}
-          <div className="hidden lg:flex lg:items-center lg:justify-center">
-            <ul className="flex flex-col mr-12 items-center gap-y-4 lg:flex-row lg:gap-x-0 lg:space-y-0">
+          {/* Mobile Menu Toggle Button */}
+          <button
+            className="lg:hidden text-[#191e61] focus:outline-none"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          </button>
+
+          {/* Desktop Menu Items */}
+          <div className="hidden lg:flex lg:items-center lg:justify-center lg:flex-1">
+            <ul className="flex flex-col items-center gap-y-4 lg:flex-row lg:gap-x-5 lg:space-y-0">
               {[
                 { href: "/", label: "Home" },
-                { href: "/top-packages", label: "Tour Packages" },
+                { href: "/distanation", label: "Distanation" },
                 { href: "/top-excursions", label: "Short Excursions" },
-                { href: "/nile-cruises", label: "Nile Cruises" },
                 { href: "/blogs", label: "Blogs" },
+                { href: "/contact", label: "Contact Us" },
               ].map(({ href, label }) => (
-                <Link href={href} key={href}>
-                  <li
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`block font-segoe font-semibold text-nowrap text-[14px] px-3 py-1 rounded transition-colors duration-300 ${
+                <li key={href} onClick={() => setIsMenuOpen(false)}>
+                  <Link
+                    href={href}
+                    className={`block font-segoe font-semibold text-[14px] px-3 transition-colors duration-300 ${
                       router.pathname === href
-                        ? "text-gray-600"
-                        : "text-black hover:text-gray-300"
+                        ? "text-blue-800"
+                        : "text-[#6095e4] hover:border-b hover:border-b-blue-500 hover:text-[#71a0dd]"
                     }`}
                   >
                     {label}
-                  </li>
-                </Link>
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
 
-          {/* Icons and Mobile Menu Button */}
-          <div className="flex items-center justify-end space-x-6">
-            {/* Earth Icon for Language Change - hidden on mobile */}
+          {/* Earth Icon for Language Change (Desktop Only) */}
+          <div className="hidden lg:flex items-center">
             <button
-              className="hidden lg:block focus:outline-none"
+              className={`focus:outline-none ${
+                isScrolled ? "text-[#132f4e]" : "text-[#123b4b]"
+              }`}
               onClick={handleLanguageChange}
               title="Change Language"
             >
               <CiGlobe size={30} />
-            </button>
-
-            {/* Search Button - hidden on mobile */}
-            <button
-              className="hidden lg:block focus:outline-none"
-              title="Search"
-            >
-              <AiOutlineSearch size={30} className="text-black" />
-            </button>
-
-            {/* Login Button - hidden on mobile */}
-            <Link href="/login" className="hidden lg:flex items-center">
-              <span className="ml-2 bg-black p-2 rounded-md px-10 text-white">
-                Login
-              </span>
-            </Link>
-
-            {/* Mobile Menu Button (Visible on Mobile Only) */}
-            <button
-              className="lg:hidden text-gray-900 focus:outline-none"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <AiOutlineMenuFold size={30} />
             </button>
           </div>
         </div>

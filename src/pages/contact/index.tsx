@@ -6,7 +6,7 @@ type Props = {};
 
 const Contact = (props: Props) => {
   return (
-    <div className="font-segoe mt-16 lg:mt-20">
+    <div className="font-segoe mt-14 lg:mt-16">
       <div className="bg-gradient-to-r from-yellow-700 to-yellow-300 w-full h-60">
         <Image
           src={ImageContact}

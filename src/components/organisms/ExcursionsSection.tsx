@@ -1,20 +1,16 @@
 import React from "react";
 import Excursions from "../molecules/Excursions/Excursions";
-import { TourPackage } from "@/types/tour"; // Import TourPackage type
 
-interface ExcursionsSectionProps {
-  toursData: TourPackage[]; // Define the type for toursData
-}
+type Props = {};
 
-const ExcursionsSection: React.FC<ExcursionsSectionProps> = ({ toursData }) => {
+const ExcursionsSection = (props: Props) => {
   return (
     <div className="bg-[#FAFAFA]">
-      <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer md:p-10 p-5">
+      <div className="text-center text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer md:p-10 p-5">
         Top Excursions
       </div>
       <div>
-        <Excursions toursData={toursData} />{" "}
-        {/* Pass toursData to Excursions */}
+        <Excursions />
       </div>
     </div>
   );
