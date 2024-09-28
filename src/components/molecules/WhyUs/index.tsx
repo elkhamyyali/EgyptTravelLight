@@ -89,6 +89,12 @@ const cardData: CardData[] = [
       "We respect that your vacation is an investment of time and money and we want to help you get the most of it. Our team will help you to offer tour packages at extremely competitive prices, so you can see more and do more on your trip",
     icon: <FaChartLine className="text-[#C7AC4F] text-2xl mx-auto mb-4" />,
   },
+  {
+    title: "Team of speakers with your own language ",
+    description:
+      "You're reading this page in English, but did you know we also have guides and tour leaders speak French, German, Arabic, Russian, Portuguese, Spanish, Italian, Chinese, and Japanese? We guide travelers from all over the world and are dedicated to providing top-services in their native languages. Your inquiries, reservation",
+    icon: <FaTag className="text-[#C7AC4F] text-2xl mx-auto mb-4" />,
+  },
 ];
 
 const WhyUs: React.FC = () => {
