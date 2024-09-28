@@ -70,7 +70,7 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
             <DatePickerInput
               selectedDate={selectedDate}
               onDateChange={handleDateChange} // Call handleDateChange
-              width="350px"
+              width="full"
               height="40px"
               labelProps={{
                 fontSize: "14px",

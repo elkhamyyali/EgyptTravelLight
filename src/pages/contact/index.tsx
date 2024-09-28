@@ -1,10 +1,15 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react"; // Import useState
+import PhoneInput from "react-phone-number-input"; // Ensure PhoneInput is installed
 import ImageContact from "../../../public/assets/camels.jpeg";
 import { Button } from "@mui/material";
+import "react-phone-number-input/style.css"; // Import PhoneInput styles
+
 type Props = {};
 
 const Contact = (props: Props) => {
+  const [phone, setPhone] = useState(""); // State for phone input
+
   return (
     <div className="font-segoe mt-14 lg:mt-16">
       <div className="bg-gradient-to-r from-yellow-700 to-yellow-300 w-full h-60">
@@ -42,46 +47,17 @@ const Contact = (props: Props) => {
                 className="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#a39909]"
               />
             </div>
-            <div>
-              <label className="text-gray-800 text-sm block mb-2">
-                Your Number
-              </label>
-              <input
-                type="email"
-                placeholder="Phone No."
-                className="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#a39909]"
+
+            <div className="relative flex items-center mt-2">
+              <PhoneInput
+                placeholder="Enter Your Number"
+                value={phone} // Use phone state here
+                onChange={setPhone} // Update phone state on change
+                defaultCountry="EG"
+                className="w-full p-3 border border-gray-300 rounded-md"
               />
             </div>
-            <div>
-              <label className="text-gray-800 text-sm block mb-2">
-                Website
-              </label>
-              <input
-                type="text"
-                placeholder="Website"
-                className="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#a39909]"
-              />
-            </div>
-            <div>
-              <label className="text-gray-800 text-sm block mb-2">
-                Company
-              </label>
-              <input
-                type="text"
-                placeholder="Company"
-                className="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#a39909]"
-              />
-            </div>
-            <div>
-              <label className="text-gray-800 text-sm block mb-2">
-                Subject
-              </label>
-              <input
-                type="text"
-                placeholder="Subject"
-                className="w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#a39909]"
-              />
-            </div>
+
             <div className="col-span-full">
               <label className="text-gray-800 text-sm block mb-2">
                 Message
@@ -110,7 +86,7 @@ const Contact = (props: Props) => {
                 </a>
               </label>
             </div>
-            <Button className="text-white w-max bg-custom-gradient hover:bg-yellow-600 tracking-wide rounded-md text-sm px-6 py-3 mt-4">
+            <Button className="text-white w-max bg-blue-700 hover:bg-blue-400 tracking-wide rounded-md text-sm px-6 py-3 mt-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16px"

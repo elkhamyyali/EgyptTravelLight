@@ -9,7 +9,7 @@ const HeroSection = () => {
       <HeroSlider />
 
       {/* Overlay Content */}
-      <div className="absolute lg:mt-32 mt-40 inset-0 flex flex-col items-center justify-center">
+      <div className="absolute lg:mt-32 mt-56 inset-0 flex flex-col items-center justify-center">
         {/* Search Form */}
         <SearchForm />
       </div>

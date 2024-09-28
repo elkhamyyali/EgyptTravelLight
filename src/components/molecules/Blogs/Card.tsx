@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({
   const imageToUse = imageSrc && imageSrc !== "" ? imageSrc : DefaultImage;
 
   return (
-    <div className="flex-shrink-0 max-w-md mx-2 rounded-t-3xl overflow-hidden shadow-lg bg-[#FAFAFA]">
+    <div className="flex-shrink-0  mx-2 overflow-hidden shadow-lg bg-[#FAFAFA]">
       <Link href={`/blogs/${id}`}>
         <div className="relative">
           <Image
@@ -30,10 +30,10 @@ const Card: React.FC<CardProps> = ({
             alt={title}
             width={512}
             height={320}
-            className="w-full h-80 object-cover"
+            className="w-full h-64 object-cover"
           />
-          <div className="absolute bottom-0 left-0 font-segoe right-0 h-28 lg:h-20 bg-blue-400 backdrop-blur-md">
-            <div className="absolute bottom-0 left-0 p-4 text-white">
+          <div className="absolute bottom-0 left-0 font-segoe right-0 h-28 lg:h-28 bg-white backdrop-blur-md">
+            <div className="absolute top-4 left-0 p-4 text-black">
               <h2 className="text-base md:text-xl font-sego">{title}</h2>
               {/* <p className="text-sm">{content}</p> */}
               <p className="text-xs">

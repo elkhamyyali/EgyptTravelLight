@@ -10,22 +10,22 @@ const mobileSliderSettings = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 1.1,
+  slidesToShow: 1, // Changed from 1.1 to 1 to prevent overflow
   slidesToScroll: 1,
   arrows: false,
   autoplay: false,
   autoplaySpeed: 3000,
-  centerMode: true,
+  centerMode: true, // Adjust if necessary
 };
 
 const laptopSliderSettings = {
   speed: 500,
-  slidesToShow: 3.5,
+  slidesToShow: 4,
   slidesToScroll: 1,
   arrows: true,
-  infinite: false, // Corrected the key
+  infinite: false,
 };
-// Define static fallback data
+
 const staticBlogData = {
   data: [
     {
@@ -65,7 +65,6 @@ type Props = {
 };
 
 const RelatedBlog: React.FC<Props> = ({ blogData }) => {
-  // Ensure that blogData is always an array, either directly or within `data`.
   const dataToShow = Array.isArray(blogData)
     ? blogData
     : blogData?.data?.length
@@ -73,11 +72,11 @@ const RelatedBlog: React.FC<Props> = ({ blogData }) => {
     : staticBlogData.data;
 
   return (
-    <div className="p-0">
-      <div className="hidden md:block max-w-screen-xl mx-auto mb-3">
+    <div className="p-0 overflow-hidden">
+      <div className="hidden md:block w-full mx-0 mb-3">
         <Slider {...laptopSliderSettings}>
           {dataToShow.map((blog) => (
-            <div key={blog.id} className="ml-2">
+            <div key={blog.id}>
               <Card
                 imageSrc={blog.image}
                 title={blog.title}
@@ -93,7 +92,7 @@ const RelatedBlog: React.FC<Props> = ({ blogData }) => {
       <div className="block md:hidden">
         <Slider {...mobileSliderSettings}>
           {dataToShow.map((blog) => (
-            <div key={blog.id} className="px-0">
+            <div key={blog.id}>
               <Card
                 imageSrc={blog.image}
                 title={blog.title}

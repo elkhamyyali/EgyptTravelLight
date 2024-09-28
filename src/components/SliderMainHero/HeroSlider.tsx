@@ -35,7 +35,7 @@ export default function HeroSlider() {
     <div className="relative w-full overflow-hidden">
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} className="relative h-96">
+          <div key={index} className="relative h-[500px]">
             <Image
               src={slide.image}
               alt={`Slide ${index + 1}`}

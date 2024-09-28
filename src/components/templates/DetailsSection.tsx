@@ -8,6 +8,8 @@ import Reviews from "./Reviews";
 import RandomButtons from "./RandomButtons";
 import { TourDetail } from "@/types/tour";
 import TripInfo from "./Trip";
+import ExploreDetails from "./ExploreDetails";
+import AdditionalInfo from "./AddationalInfo";
 
 interface MyPagedeailsProps {
   DetailTour: TourDetail;
@@ -17,13 +19,18 @@ const DetailsSection: React.FC<MyPagedeailsProps> = ({ DetailTour }) => {
     <div>
       {" "}
       <div className="lg:px-28 pt-5">
+        <ExploreDetails />
         <TripInfo DetailTour={DetailTour} />
         <Included DetailTour={DetailTour} />
+        <hr className="mt-2" />
         <TourItinerary DetailTour={DetailTour} />
         {/* <PricePlans DetailTour={{ tour_prices: DetailTour.tour_prices }} /> */}
-        <UserProfilePage />
+        {/* <UserProfilePage /> */}
+        <AdditionalInfo />
+        <hr className="mt-2" />
         <FAQ DetailTour={DetailTour} />
-        <Reviews />
+        <hr className="mt-2" />
+        {/* <Reviews /> */}
         <RandomButtons DetailTour={{ tags: DetailTour.tags }} />
       </div>
     </div>

@@ -73,7 +73,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
                 },
               },
             },
-            fullWidth: false,
+            fullWidth: true,
             variant: "outlined",
           },
         }}

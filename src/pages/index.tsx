@@ -16,6 +16,7 @@ import { TourPackage, ToursData } from "@/types/tour";
 import { Destination } from "./blogs";
 import ViatorBenefits from "@/components/organisms/OffersSection";
 import ExploreEgyptSection from "@/components/molecules/NewHome";
+import RelatedBlog from "@/components/molecules/Blogs/RelatedBlog";
 
 type Blog = {
   id: number;
@@ -58,7 +59,12 @@ export default function Home({
       <ExploreEgyptSection />
       <PeaopleSaySection />
       {/* Add Blog Section */}
-      <BlogSection blogData={blogData} />
+      <div>
+        <div className="text-center text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer md:p-10 p-5">
+          Blogs
+        </div>
+        <RelatedBlog blogData={blogData} />
+      </div>
     </>
   );
 }

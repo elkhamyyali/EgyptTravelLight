@@ -1,6 +1,5 @@
-import React from "react";
-import { MdDone } from "react-icons/md";
-import { VscError } from "react-icons/vsc";
+import React, { useState } from "react";
+import { Check, X, ChevronDown, ChevronUp } from "lucide-react";
 import { TourDetail, TourIncludeItem } from "@/types/tour";
 
 interface IncludedProps {
@@ -8,7 +7,7 @@ interface IncludedProps {
 }
 
 const Included: React.FC<IncludedProps> = ({ DetailTour }) => {
-  // Separate included and not-included items into two arrays
+  const [isOpen, setIsOpen] = useState(true); // State to manage collapse/expand
   const includedItems = DetailTour.tour_includes?.filter(
     (item: TourIncludeItem) => item.status === "yes"
   );
@@ -16,60 +15,62 @@ const Included: React.FC<IncludedProps> = ({ DetailTour }) => {
     (item: TourIncludeItem) => item.status !== "yes"
   );
 
+  const toggleSection = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
     <div>
-      <h2 className="text-3xl font-segoe text-start mt-2 lg:mt-7">
-        What’s Included
-      </h2>
+      <div
+        className="flex justify-between items-center cursor-pointer"
+        onClick={toggleSection}
+      >
+        <h2 className="flex items-center hover:underline text-3xl font-bold text-start mt-2 lg:mt-7 cursor-pointer">
+          What’s Included
+        </h2>
+        <span className="ml-2 cursor-pointer">
+          {isOpen ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+        </span>
+      </div>
 
-      {/* Flex container for two columns */}
-      <div className="flex flex-col md:flex-row lg:gap-16 gap-3 mt-4">
-        {/* Column for Included Items (with MdDone icon) */}
-        <div className="w-full md:w-1/2">
-          <h3 className="font-segoe text-green-700 text-2xl mb-4">Included</h3>
-          {includedItems?.map((item: TourIncludeItem, index: number) => (
-            <div key={index} className="flex items-center p-0">
-              <div>
-                {/* <span className="font-segoe text-[#A16207] text-xl">
-                  {item.title}
-                </span> */}
-                <div className="flex ">
-                  <div className="text-green-700 mr-2 mt-1">
-                    <MdDone className="" size={20} />
+      {/* Transition for included items */}
+      <div
+        className={`overflow-hidden transition-max-height duration-500 ease-in-out ${
+          isOpen ? "max-h-screen" : "max-h-0"
+        }`}
+      >
+        <div className="flex flex-col md:flex-row lg:gap-16 gap-3 mt-4">
+          {/* Column for Included Items */}
+          <div className="w-full md:w-1/2">
+            {includedItems?.map((item: TourIncludeItem, index: number) => (
+              <div key={index} className="flex items-center p-0">
+                <div className="flex">
+                  <div className="text-gray-700 mr-2 mt-1">
+                    <Check size={25} />
                   </div>
-                  <div className="text-gray-700 font-segoe text-[16px]">
-                    {" "}
+                  <div className="text-gray-700 font-segoe text-[18px]">
                     {item.description}
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* Column for Not Included Items (with VscError icon) */}
-        <div className="w-full md:w-1/2">
-          <h3 className="font-segoe text-red-500 text-2xl mb-4">
-            Not Included
-          </h3>
-          {notIncludedItems?.map((item: TourIncludeItem, index: number) => (
-            <div key={index} className="flex items-center">
-              <div>
-                {/* <span className="font-segoe text-[#A16207] text-xl">
-                  {item.title}
-                </span> */}
-                <div className="flex ">
-                  <div className="text-red-500 mr-2 mt-[2px]">
-                    <VscError className="" size={20} />
+          {/* Column for Not Included Items */}
+          <div className="w-full md:w-1/2">
+            {notIncludedItems?.map((item: TourIncludeItem, index: number) => (
+              <div key={index} className="flex items-center">
+                <div className="flex">
+                  <div className="text-gray-500 mr-2 mt-[2px]">
+                    <X size={25} />
                   </div>
-
-                  <div className="text-gray-700 flex font-segoe text-[16px]">
+                  <div className="text-gray-700 flex font-segoe text-[18px]">
                     {item.description}
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
