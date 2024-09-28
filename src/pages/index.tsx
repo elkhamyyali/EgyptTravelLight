@@ -14,6 +14,8 @@ import BlogSection from "@/components/organisms/BlogSection";
 import fetchData from "@/helper/FetchData";
 import { TourPackage, ToursData } from "@/types/tour";
 import { Destination } from "./blogs";
+import ViatorBenefits from "@/components/organisms/OffersSection";
+import ExploreEgyptSection from "@/components/molecules/NewHome";
 
 type Blog = {
   id: number;
@@ -44,14 +46,16 @@ export default function Home({
   return (
     <>
       <HeroSection />
-      <OffersSection />
+      <ViatorBenefits />
       <WhyUsSection />
-      <ToursSection toursData={toursData} />
+      {/* <ToursSection toursData={toursData} /> */}
       <ExcursionsSection toursData={excursionData} /> {/* Use excursionData */}
       <DestinationSection Destinations={limitedDestinations} />{" "}
       {/* Pass limited destinations */}
       <AttractionsSection />
+      <WhyUsSection />
       <AdventuresSection />
+      <ExploreEgyptSection />
       <PeaopleSaySection />
       {/* Add Blog Section */}
       <BlogSection blogData={blogData} />

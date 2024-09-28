@@ -1,12 +1,12 @@
 import React from "react";
-import WhyUs from "../molecules/WhyUs";
+import FlexibilityBanner from "../molecules/WhyUs";
 
 type Props = {};
 
 const WhyUsSection = (props: Props) => {
   return (
     <div className="mt-6 lg:mt-12">
-      <WhyUs />
+      <FlexibilityBanner />
     </div>
   );
 };
