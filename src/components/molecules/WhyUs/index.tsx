@@ -89,12 +89,6 @@ const cardData: CardData[] = [
       "We respect that your vacation is an investment of time and money and we want to help you get the most of it. Our team will help you to offer tour packages at extremely competitive prices, so you can see more and do more on your trip",
     icon: <FaChartLine className="text-[#C7AC4F] text-2xl mx-auto mb-4" />,
   },
-  {
-    title: "Excellence in service",
-    description:
-      "Quality is our top priority, and our team of fun and friendly experts are the secret ingredient to an amazing expedition. You'll be awed by the sights on your itinerary, but it's our personable and knowledgeable Egyptologists that will really help make your experience true",
-    icon: <FaChartLine className="text-[#C7AC4F] text-2xl mx-auto mb-4" />,
-  },
 ];
 
 const WhyUs: React.FC = () => {

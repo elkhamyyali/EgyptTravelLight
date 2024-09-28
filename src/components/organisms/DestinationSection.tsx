@@ -11,10 +11,10 @@ type Destination = {
 
 // Define the props type for DestinationSection
 type Props = {
-  Destinations: Destination[];
+  Destinations?: Destination[]; // Make Destinations optional
 };
 
-const DestinationSection: React.FC<Props> = ({ Destinations }) => {
+const DestinationSection: React.FC<Props> = ({ Destinations = [] }) => {
   // Map Destinations directly, as Destinations is already an array
   const mappedDestinations = Destinations.map((dest) => ({
     name: dest.name,
@@ -26,7 +26,7 @@ const DestinationSection: React.FC<Props> = ({ Destinations }) => {
       <div className="text-center text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer md:p-10 p-5">
         Destination
       </div>
-      <div>
+      <div className="">
         <DestinationRow Destinations={mappedDestinations} />
       </div>
     </div>

@@ -15,11 +15,11 @@ const Footer = (props: Props) => {
   return (
     <footer className="bg-white py-10 px-10 font-sans tracking-wide mt-4">
       <div className="max-w-2xl mx-auto text-center">
-        <Link href="/" className="inline-block">
+        {/* <Link href="/" className="inline-block">
           <Image src={Logo} alt="logo" className="w-48" />
-        </Link>
+        </Link> */}
         <p
-          className="text-sm mt-8 text-black"
+          className="text-sm mt-1 text-black"
           dangerouslySetInnerHTML={{ __html: data?.data[3]?.value?.footerDesc }}
         />
 
@@ -206,7 +206,7 @@ const Footer = (props: Props) => {
           </li>
         </ul>
         <p className="text-sm text-black md:ml-auto">
-          © SaryaEl-nile. All rights reserved.
+          © Egyot Travel Lite. All rights reserved.
         </p>
       </div>
     </footer>

@@ -23,8 +23,8 @@ const PyramidsSection: React.FC<PyramidsSectionProps> = ({
   const [activeTab, setActiveTab] = useState<string>("Overview");
 
   return (
-    <div className="relative h-auto w-full lg:mt-28">
-      {/* <div className="relative h-96">
+    <div className="relative h-auto w-full lg:mt-16">
+      <div className="relative h-96">
         <div className="absolute inset-0">
           <Image
             src={Try}
@@ -75,13 +75,13 @@ const PyramidsSection: React.FC<PyramidsSectionProps> = ({
       </div>
       <div className="flex flex-wrap justify-center mt-28 sm:mt-36 md:mt-20 px-4 py-6 sm:px-6 overflow-x-auto">
         <div className="flex space-x-2 sm:space-x-4">
-          {["Overview", "Packages", "Excursions"].map((tab) => (
+          {["Overview", "Tours & Tickets"].map((tab) => (
             <button
               key={tab}
               className={`text-center font-segoe py-2 px-4 rounded-md whitespace-nowrap ${
                 activeTab === tab
-                  ? "bg-custom-gradient text-white"
-                  : "bg-white text-gray-700"
+                  ? "bg-blue-800 text-white "
+                  : "bg-white text-gray-700 hover:bg-blue-100"
               }`}
               onClick={() => setActiveTab(tab)}
             >
@@ -93,15 +93,15 @@ const PyramidsSection: React.FC<PyramidsSectionProps> = ({
       <div className="mt-4">
         <div className="rounded-md">
           {activeTab === "Overview" && <PackageDetails />}
-          {activeTab === "Packages" && <ExcursionsTab toursData={toursData} />}
-          {activeTab === "Excursions" && (
+          {/* {activeTab === "Packages" && <ExcursionsTab toursData={toursData} />} */}
+          {activeTab === "Tours & Tickets" && (
             <OverView toursData={excursionsData} />
           )}
         </div>
-      </div> */}
+      </div>
 
-      <SearchInput />
-      <ExcursionsTab toursData={toursData} />
+      {/* <SearchInput />
+      <ExcursionsTab toursData={toursData} /> */}
     </div>
   );
 };

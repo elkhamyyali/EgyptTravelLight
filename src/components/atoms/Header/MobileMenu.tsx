@@ -1,4 +1,3 @@
-// MobileMenu.tsx
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,6 +15,14 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   onLanguageChange,
 }) => {
   const router = useRouter();
+
+  const menuItems = [
+    { href: "/", label: "Home" },
+    { href: "/distanation", label: "Distanation" },
+    { href: "/top-excursions", label: "Excursions" },
+    { href: "/blogs", label: "Blogs" },
+    { href: "/contact", label: "Contact Us" },
+  ];
 
   return (
     <div
@@ -44,27 +51,17 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
       </button>
 
       <ul className="flex flex-col items-center gap-y-4 mt-12">
-        {[
-          "Explore",
-          "Top Packages",
-          "Top Excursions",
-          "Nile Cruises",
-          "Blogs",
-        ].map((item) => (
-          <li key={item} onClick={onClose}>
+        {menuItems.map(({ href, label }) => (
+          <li key={href} onClick={onClose}>
             <Link
-              href={
-                item === "Explore"
-                  ? "/"
-                  : `/${item.toLowerCase().replace(" ", "-")}`
-              }
+              href={href}
               className={`block font-segoe font-semibold text-[14px] px-3 py-1 rounded ${
-                router.pathname === `/${item.toLowerCase().replace(" ", "-")}`
+                router.pathname === href
                   ? "text-blue-950"
                   : "text-[#6095e4] hover:border-b hover:border-b-blue-500 hover:text-[#71a0dd]"
               }`}
             >
-              {item}
+              {label}
             </Link>
           </li>
         ))}

@@ -98,7 +98,7 @@ export const Header = ({ header, className }: HeaderProps_TP) => {
               {[
                 { href: "/", label: "Home" },
                 { href: "/distanation", label: "Distanation" },
-                { href: "/top-excursions", label: "Short Excursions" },
+                { href: "/top-excursions", label: "Excursions" },
                 { href: "/blogs", label: "Blogs" },
                 { href: "/contact", label: "Contact Us" },
               ].map(({ href, label }) => (

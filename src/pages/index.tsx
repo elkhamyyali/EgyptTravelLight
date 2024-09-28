@@ -9,44 +9,68 @@ import {
   ToursSection,
   WhyUsSection,
 } from "@/components/organisms";
+import BlogSection from "@/components/organisms/BlogSection";
+
 import fetchData from "@/helper/FetchData";
-import { ToursData } from "@/types/tour";
+import { TourPackage, ToursData } from "@/types/tour";
+import { Destination } from "./blogs";
+
+type Blog = {
+  id: number;
+  title: string;
+  content: string;
+  created_at: string;
+  image: string;
+};
 
 interface HomeProps {
-  toursData: ToursData;
+  toursData: ToursData; // Tours data for general tours
+  excursionData: TourPackage[]; // Rename for excursion tours data
+  blogData: {
+    data: Blog[]; // blogData will contain a data array
+  };
+  Destinations: Destination[];
 }
 
-export default function Home({ toursData }: HomeProps) {
-  console.log("🚀 ~ Home ~ toursData:", toursData);
+export default function Home({
+  toursData,
+  excursionData,
+  blogData,
+  Destinations,
+}: HomeProps) {
+  // Limit Destinations to a maximum of 8
+  const limitedDestinations = Destinations.slice(0, 8);
 
   return (
     <>
       <HeroSection />
-      <div className="p-3">
-        <OffersSection />
-      </div>
+      <OffersSection />
       <WhyUsSection />
-      <div className="lg:pr-3 lg:pl-4  bg-[#FAFAFA]">
-        <ToursSection toursData={toursData} />
-      </div>
-
-      {/* <DestinationSection /> */}
-      {/* <AttractionsSection /> */}
-      {/* <ExcursionsSection /> */}
-      {/* <AdventuresSection /> */}
-      <div className=" lg:px-3 bg-[#FAFAFA]">
-        <PeaopleSaySection />
-      </div>
+      <ToursSection toursData={toursData} />
+      <ExcursionsSection toursData={excursionData} /> {/* Use excursionData */}
+      <DestinationSection Destinations={limitedDestinations} />{" "}
+      {/* Pass limited destinations */}
+      <AttractionsSection />
+      <AdventuresSection />
+      <PeaopleSaySection />
+      {/* Add Blog Section */}
+      <BlogSection blogData={blogData} />
     </>
   );
 }
 
 export async function getServerSideProps() {
-  const data: ToursData = await fetchData("tours");
+  const toursData: ToursData = await fetchData("tours");
+  const excursionData = await fetchData("tours?type=excursion"); // Rename this variable
+  const Destinations = await fetchData("cities");
+  const blogData = await fetchData("blogs");
 
   return {
     props: {
-      toursData: data,
+      toursData: toursData,
+      excursionData: excursionData.data as TourPackage[], // Pass the renamed variable
+      blogData: blogData,
+      Destinations: Destinations.data,
     },
   };
 }

@@ -5,6 +5,7 @@ import ImageCard from "../../../../public/assets/Secondimage.jpeg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { sampleAttractions } from "@/data";
+import Link from "next/link";
 
 type Attraction = {
   id: number;
@@ -19,25 +20,27 @@ const AttractionCard: React.FC<Attraction> = ({
   toursCount,
 }) => {
   return (
-    <div className="flex items-center cursor-pointer rounded-lg overflow-hidden md:w-80 w-72 md:mx-0 ml-28 h-24 transition-transform duration-300 ease-in-out hover:shadow-lg hover:border border-gray-200 hover:bg-white">
-      <div className="w-24 h-24 relative flex-shrink-0 overflow-hidden">
-        <Image
-          src={imageSrc}
-          alt={name}
-          layout="fill"
-          objectFit="cover"
-          className="transform transition-transform duration-300 ease-in-out hover:scale-110"
-        />
+    <Link href="attraction">
+      <div className="flex items-center cursor-pointer rounded-lg overflow-hidden md:w-80 w-72 md:mx-0 ml-28 h-24 transition-transform duration-300 ease-in-out hover:shadow-lg hover:border border-gray-200 hover:bg-white">
+        <div className="w-24 h-24 relative flex-shrink-0 overflow-hidden">
+          <Image
+            src={imageSrc}
+            alt={name}
+            layout="fill"
+            objectFit="cover"
+            className="transform transition-transform duration-300 ease-in-out hover:scale-110"
+          />
+        </div>
+        <div className="flex-grow p-4 flex flex-col justify-center">
+          <h2 className="text-sm font-semibold text-gray-800 truncate font-segoe">
+            {name}
+          </h2>
+          <p className="text-xs text-gray-600 truncate font-segoe">
+            {toursCount} Tours and Activities
+          </p>
+        </div>
       </div>
-      <div className="flex-grow p-4 flex flex-col justify-center">
-        <h2 className="text-sm font-semibold text-gray-800 truncate font-segoe">
-          {name}
-        </h2>
-        <p className="text-xs text-gray-600 truncate font-segoe">
-          {toursCount} Tours and Activities
-        </p>
-      </div>
-    </div>
+    </Link>
   );
 };
 
