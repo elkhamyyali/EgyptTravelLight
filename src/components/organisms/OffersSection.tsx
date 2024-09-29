@@ -80,7 +80,7 @@ const ViatorBenefits = () => {
   return (
     <div className="py-12 px-4 max-w-6xl mx-auto">
       <h2 className="text-3xl font-bold text-center mb-10">
-        Why book with Viator?
+        Why book with Egypt Travel Lite ?
       </h2>
       <div className="hidden md:block">
         {/* Grid layout for larger screens */}
