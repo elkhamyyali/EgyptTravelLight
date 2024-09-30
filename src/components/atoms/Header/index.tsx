@@ -5,19 +5,33 @@ import MobileMenu from "./MobileMenu";
 import DesktopMenu from "./DesktopMenu";
 
 export const Header = ({ header, className }: any) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
-      setIsScrolled(scrollTop > 0);
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024); // 1024px is typically the breakpoint for lg in Tailwind
     };
 
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleScroll = () => {
+    if (!isDesktop) return; // Only apply scroll behavior on desktop
+
+    const currentScrollPos = window.pageYOffset;
+    setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+    setPrevScrollPos(currentScrollPos);
+  };
+
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [prevScrollPos, visible, isDesktop]);
 
   const handleLanguageChange = () => {
     alert("Language change button clicked!");
@@ -34,8 +48,9 @@ export const Header = ({ header, className }: any) => {
   return (
     <>
       <header
-        className={`fixed top-0 w-full z-40 px-4 sm:px-16 bg-white shadow-md 
-        ${isScrolled ? "lg:relative lg:translate-y-0 lg:shadow-md" : ""}`}
+        className={`fixed top-0 w-full z-40 px-4 sm:px-16 bg-white shadow-md transition-transform duration-300 ${
+          isDesktop && !visible ? "-translate-y-full" : "translate-y-0"
+        }`}
       >
         <div className="flex items-center justify-between py-4">
           {/* Logo aligned to the left */}
@@ -62,11 +77,7 @@ export const Header = ({ header, className }: any) => {
               onClick={handleLanguageChange}
               title="Change Language"
             >
-              <Globe
-                className={`w-6 h-6 ${
-                  isScrolled ? "text-[#132f4e]" : "text-[#123b4b]"
-                }`}
-              />
+              <Globe className="w-6 h-6 text-[#132f4e]" />
             </button>
             <button className="bg-[#6095e4] text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-[#4a7ac7]">
               Book Tour Now
